@@ -1,7 +1,14 @@
 import React from "react";
+import {useState, useEffect} from 'react'
 import booksData from '../data/books'
 
 function Home() {
+    const [books, setBooks] = useState([])
+
+    useEffect(() => {
+        setBooks(booksData)
+    }, [books])
+
     return (
         <main>
             <div className="header-container">
@@ -22,31 +29,31 @@ function Home() {
                 <div className="collection-container">
 
 
-                    {booksData.map((book) => 
+                    {booksData.map((books) => 
                         <div>
-                            <div className="Comic-Collection">
-                                <img src={`./images/${book.image}`} alt={book.title}/>
+                            <div key={books.id} className="Comic-Collection">
+                                <img src={`./images/${books.image}`} alt={books.title}/>
                             </div>
                             <div className="Comic-Collection">
-                               <p className="book-title">Title: {book.title}</p>
+                               <p className="book-title">Title: {books.title}</p>
                             </div>
                             <div className="Comic-Collection">
-                               <p className="book-author">Author: {book.author}</p>
+                               <p className="book-author">Author: {books.author}</p>
                             </div>
                             <div className="Comic-Collection">
-                               <p className="book-publisher">Publisher: {book.publisher}</p>
+                               <p className="book-publisher">Publisher: {books.publisher}</p>
                             </div>
                             <div className="Comic-Collection">
-                               <p className="book-genre">Genre: {book.genre}</p>
+                               <p className="book-genre">Genre: {books.genre}</p>
                             </div>
                             <div className="Comic-Collection">
-                               <p className="book-pages">Pages: {book.pages}</p>
+                               <p className="book-pages">Pages: {books.pages}</p>
                             </div>
                             <div className="Comic-Collection">
-                               <p className="">Rating: {book.rating}</p>
+                               <p className="">Rating: {books.rating}</p>
                             </div>
                             <div className="Comic-Collection">
-                               <p className="">Synopsis: {book.synopsis}</p>
+                               <p className="">Synopsis: {books.synopsis}</p>
                             </div>
                             <div className="Comic-Details">
                                <a href="#">Details</a>

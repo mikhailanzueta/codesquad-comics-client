@@ -1,21 +1,34 @@
 import React from "react";
+// import {useState, useEffect} from 'react'
 
 function Create() {
+    const createFormSubmission = (e) => {
+        e.preventDefault();
+        console.log(`This method ran.`)
+        console.log(e.title.value)
+        console.log(e.author.value)
+        console.log(e.publisher.value)
+        console.log(e.genre.value)
+        console.log(e.pages.value)
+        console.log(e.synopsis.value)
+    }
+
+
     return (
         <main>
             <div className="create-comic-container">
                 <div className="create-comic">
                     <h1>CREATE NEW COMIC</h1>
-                    <form action="#" className="comic-form">
+                    <form action="#" className="comic-form" onSubmit={createFormSubmission}>
                         <div>
                             <label htmlFor="title" className="title-field">Title: 
-                                <input type="text" className="title-input" id="title" placeholder="Title"/>
+                                <input type="text" className="title-input" id="title" placeholder="Title" required/>
                             </label>
                         </div>
                         <br></br>
                         <div>
                             <label htmlFor="author" className="author-field">Author:
-                                <input type="text" className="author-input" id="author" placeholder="Author"/>
+                                <input type="text" className="author-input" id="author" placeholder="Author" required/>
                             </label>
                         </div>
                         <br></br>
@@ -38,19 +51,19 @@ function Create() {
                         <br></br>
                         <div>
                             <label htmlFor="genre">Genre:
-                                <input type="text" className="genre-input" id="genre" placeholder="Genre"/>
+                                <input type="text" className="genre-input" id="genre" placeholder="Genre" required/>
                             </label>
                         </div>
                         <br></br>
                         <div>
                             <label htmlFor="pages">Number of Pages: 
-                                <input type="text" className="pages-input" id="pages" placeholder="Number of Pages"/>
+                                <input type="text" className="pages-input" id="pages" placeholder="Number of Pages" required/>
                             </label>
                         </div>
                         <br></br>
                         <div>
                             <label htmlFor="rating">Rating: 
-                                <input type="text" className="rating-input" id="rating" placeholder="Number (0-5)"/>
+                                <input type="text" className="rating-input" id="rating" placeholder="Number (0-5)" required/>
                             </label>
                         </div>
                         <br></br>

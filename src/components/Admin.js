@@ -1,11 +1,18 @@
 import React from "react";
+import {useState, useEffect} from 'react'
 import booksData from "../data/books";
 
 
 function Admin() {
+    const [books, setBooks] = useState([])
+
+    useEffect(() => {
+        setBooks(booksData)
+    }, [])
+
     return (
         <main>
-            <div className="admin-container">
+            <div key={books.id} className="admin-container">
                 <div className="admin-page">
                     <h1>ADMIN PAGE</h1>
                 </div>
@@ -24,7 +31,7 @@ function Admin() {
                         <tbody>
                             {booksData.map((book) => 
                                 <tr>
-                                    <td>{book.title}</td>
+                                    <td>{books.title}</td>
                                     <td><button id="button" className="edit-btn">EDIT</button></td>
                                     <td><button id="button" className="delete-btn">DELETE</button></td>
                                 </tr>
