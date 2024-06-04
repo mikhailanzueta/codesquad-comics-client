@@ -4,7 +4,10 @@ function Signup({user, setUser}) {
     const signupFormSubmission = (e) => {
         e.preventDefault();
         console.log(`This method ran.`)
-        console.log(e.target.value)
+        console.log(e.firstName.value)
+        console.log(e.lastName.value)
+        console.log(e.userName.value)
+        console.log(e.password.value)
 
     }
     return(
@@ -12,16 +15,16 @@ function Signup({user, setUser}) {
             <form className="signup-form" action="#" onSubmit={signupFormSubmission}>
                 <h2>Signup</h2>
                 <div className="form-group">
-                    <label htmlFor="first-name">First Name</label>
-                    <input type="text" id="first-name" name="first-name" required />
+                    <label htmlFor="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" required />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="last-name">Last Name</label>
-                    <input type="text" id="last-name" name="last-name" required />
+                    <label htmlFor="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" required />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="username">Username</label>
-                    <input type="text" id="username" name="username" required />
+                    <label htmlFor="userName">Username</label>
+                    <input type="text" id="userName" name="userName" required />
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Password</label>

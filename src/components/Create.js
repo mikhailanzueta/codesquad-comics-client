@@ -10,6 +10,7 @@ function Create() {
         console.log(e.publisher.value)
         console.log(e.genre.value)
         console.log(e.pages.value)
+        console.log(e.rating.value)
         console.log(e.synopsis.value)
     }
 
