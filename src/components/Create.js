@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 // import {useState, useEffect} from 'react'
 
 function Create() {
+    const navigate = useNavigate();
     const createFormSubmission = (e) => {
         e.preventDefault();
         console.log(`This method ran.`)
@@ -12,6 +14,29 @@ function Create() {
         console.log(e.pages.value)
         console.log(e.rating.value)
         console.log(e.synopsis.value)
+
+        const body = {
+            title: e.target.title.value,
+            author: e.target.author.value,
+            publisher: e.target.publisher.value,
+            genre: e.target.genre.value,
+            pages: e.target.pages.value,
+            rating: e.target.rating.value,
+            synopsis: e.target.synopsis.value,
+          }
+
+        fetch("http://localhost:8080/api/books/create", {
+            method: "POST",
+            body: JSON.stringify(body)
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.statusCode === 200) {
+                    console.log('Success!');
+                    navigate('/Admin');
+                }
+            })
+            .catch(error => console.log('There was a problem fetching the data: ', error))
     }
 
 

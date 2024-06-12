@@ -1,16 +1,26 @@
 import React from "react";
 import { useState, useEffect } from 'react'
+import { useParams, useNavigate } from "react-router-dom";
 import booksData from '../data/books'
 
 function Update() {
-
-    const id = booksData[0]._id;
+    const navigate = useNavigate();
+    const { bookId } = useParams();
     const [book, setBook] = useState({})
 
     useEffect(() => {
-        const foundBook = booksData.find((book) => book._id === id);
-        setBook(foundBook)
-    }, [id])
+        fetch("`http://localhost:8080/api/books/${bookId}`", {
+            method: "GET",
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.statusCode === 200) {
+                    console.log("Success")
+                    setBook(result.data)
+                }
+            })
+            .catch(error => console.log('There was a problem fetching the data: ', error))
+    }, [])
 
     const updateFormSubmission = (e) => {
         console.log(`This method ran.`)
@@ -21,6 +31,31 @@ function Update() {
         console.log(e.target.pages.value)
         console.log(e.target.rating.value)
         console.log(e.target.synopsis.value)
+
+        const body = {
+            title: e.target.title.value,
+            author: e.target.author.value,
+            publisher: e.target.publisher.value,
+            genre: e.target.genre.value,
+            pages: e.target.pages.value,
+            rating: e.target.rating.value,
+            synopsis: e.target.synopsis.value,
+            
+        }
+
+        fetch(`http://localhost:8080/api/books/update/${bookId}`, {
+            method: "PUT",
+            body: JSON.stringify(body)
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.statusCode === 200) {
+                    console.log("Success!")
+                    setBook(result.data)
+                    navigate('/Admin')
+                }
+            })
+            .catch(error => console.log("There was a problem fetching the data: ", error))
     }
 
     return (
