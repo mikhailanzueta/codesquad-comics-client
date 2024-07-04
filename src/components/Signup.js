@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Signup = ({ user, setUser }) => {
+
+function Signup ({ user, setUser }) {
   const navigate = useNavigate();
 
   const handleSignupFormSubmit = (e) => {

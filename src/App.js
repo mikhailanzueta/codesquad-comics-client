@@ -11,6 +11,8 @@ import Update from './components/Update'
 import Header from './shared/Header'
 import Footer from './shared/Footer'
 
+import './css/styles.css'
+
 function App() {
 
   const [user, setUser] = useState(
@@ -26,17 +28,11 @@ function App() {
           <Route path='/About' element={<About />} />
           <Route path='/Admin' element={<Admin />} />
           <Route path='/Create' element={<Create />} />
-          <Route path='/login' element={<Login />} user={user} setUser={setUser} />
-          <Route path='/Signup' element={<Signup />} user={user} setUser={setUser} />
+          <Route path='/Signup' element={<Signup  user={user} setUser={setUser}/>}/>
+          <Route path='/Login' element={<Login  user={user} setUser={setUser}/>}/>
           <Route path='Update' element={<Update />} />
         </Routes>
       <Footer />
-      <Home />
-      <Login user={user} setUser={setUser}/>
-      <About />
-      <Create />
-      <Update />
-      <Admin />
     </div>
   );
 }
