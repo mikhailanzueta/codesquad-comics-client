@@ -10,6 +10,7 @@ import Create from './components/Create'
 import Update from './components/Update'
 import Header from './shared/Header'
 import Footer from './shared/Footer'
+import Details from './components/Details'
 
 import './css/styles.css'
 
@@ -30,7 +31,9 @@ function App() {
           <Route path='/Create' element={<Create />} />
           <Route path='/Signup' element={<Signup  user={user} setUser={setUser}/>}/>
           <Route path='/Login' element={<Login  user={user} setUser={setUser}/>}/>
-          <Route path='Update' element={<Update />} />
+          <Route path='/Update' element={<Update />} />
+          <Route path='/books/:bookId/Update' element={<Update />} />
+          <Route path='/Details/:bookId' element={<Details />} />
         </Routes>
       <Footer />
     </div>

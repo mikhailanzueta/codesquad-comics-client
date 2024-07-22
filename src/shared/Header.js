@@ -1,6 +1,9 @@
 import React from "react";
 import {useState, useEffect} from 'react'
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+import '../css/styles.css'
 
 
 function Header() {
@@ -38,33 +41,34 @@ function Header() {
 
 
     return (
-    <main>
-        <header>
-            <div class="Navbar-container">
-                <div class="Navbar">
-                    <nav class="navbar-logo">
-                        <img src={`./images/CodeSquad-Comics-logo.png`} alt="codesquad-comics-logo" />
-                    </nav>
+        <main>
+            <header>
+                <div className="Navbar-container">
+                    <div className="Navbar">
+                        <nav className="navbar-logo">
+                            <img src={`./images/CodeSquad-Comics-logo.png`} alt="codesquad-comics-logo" />
+                        </nav>
+                    </div>
+                    <div className="nav-links">
+                            <ul className="navbar-navigation">
+                                <li>
+                                    <Link to="/">Home</Link>
+                                </li>
+                                <li>
+                                    <Link to="/About">About</Link>
+                                </li>
+                                <li>
+                                    <Link to="/Login">Login</Link>
+                                </li>
+                            </ul>
+                    </div>
+                    <input type="checkbox" id="check" />
+                    <label htmlFor="check" className="check-btn">
+                        <FontAwesomeIcon icon={faBars} className="fa fa-bars" />
+                    </label>
                 </div>
-                <div class="nav-links">
-                    <ul class="navbar-navigation">
-                        <li>
-                            <Link to="/">HOME</Link>
-                        </li>
-                        <li>
-                            <Link to="/About">ABOUT</Link>
-                        </li>
-                        <li>
-                            <Link to="/Login">LOGIN</Link>
-                        </li>
-                        <li>
-                            <a href="#" onClick={handleLogout}>LOGOUT</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </header>
-    </main>
+            </header>
+        </main>
     )
 }
 

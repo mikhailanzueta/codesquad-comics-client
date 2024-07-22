@@ -1,6 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, Link } from "react-router-dom";
+import '../css/styles.css'
 
 function Login({user, setUser}) {
     const navigate = useNavigate();
@@ -34,6 +34,7 @@ function Login({user, setUser}) {
 
     return (
         <main>
+
             <section className="login">
                 <h1>LOGIN</h1>
                 <form action="#" className="email-login" onSubmit={loginFormSubmission}>

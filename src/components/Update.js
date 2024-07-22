@@ -1,86 +1,99 @@
 import React from "react";
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from "react-router-dom";
-import booksData from '../data/books'
+import { useParams } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import '../css/styles.css'
+import Books from '../data/books'
+
 
 
 function Update() {
-    const navigate = useNavigate();
-    const { bookId } = useParams();
-    const [book, setBook] = useState({})
+    const navigate = useNavigate()
+    const location = useLocation();
+    const [book, setBook] = useState(location.state?.book || {});
+    const { title, author, publisher, genre, pages, rating, synopsis } = book;
 
-    useEffect(() => {
-        fetch("`http://localhost:8080/api/books/${bookId}`", {
-            method: "GET",
-        })
-            .then((response) => response.json())
-            .then((result) => {
-                if (result.statusCode === 200) {
-                    console.log("Success")
-                    setBook(result.data)
-                }
-            })
-            .catch(error => console.log('There was a problem fetching the data: ', error))
-    }, [])
+    const handleChange = (e) => {
+        setBook({ ...book, [e.target.name]: e.target.value });
+    };
 
-    const updateFormSubmission = (e) => {
-        console.log(`This method ran.`)
-        console.log(e.target.title.value)
-        console.log(e.target.author.value)
-        console.log(e.target.publisher.value)
-        console.log(e.target.genre.value)
-        console.log(e.target.pages.value)
-        console.log(e.target.rating.value)
-        console.log(e.target.synopsis.value)
-
-        const body = {
-            title: e.target.title.value,
-            author: e.target.author.value,
-            publisher: e.target.publisher.value,
-            genre: e.target.genre.value,
-            pages: e.target.pages.value,
-            rating: e.target.rating.value,
-            synopsis: e.target.synopsis.value,
-            
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch(`http://localhost:8080/api/books/edit/${book._id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(book),
+            });
+            const result = await response.json();
+            if (result.statusCode === 201) {
+                // Handle success (e.g., navigate back to admin page or show a success message)
+                navigate(`/Admin`)
+            } else {
+                console.error('Book could not be updated');
+            }
+        } catch (error) {
+            console.error("There was a problem updating the book: ", error);
         }
+    };
 
-        fetch(`http://localhost:8080/api/books/update/${bookId}`, {
-            method: "PUT",
-            body: JSON.stringify(body)
-        })
-            .then((response) => response.json())
-            .then((result) => {
-                if (result.statusCode === 200) {
-                    console.log("Success!")
-                    setBook(result.data)
-                    navigate('/Admin')
-                }
+    const handleEdit = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/books/${id}`, {
+                method: "GET",
             })
-            .catch(error => console.log("There was a problem fetching the data: ", error))
+            const result = await response.json();
+            if (result.statusCode === 200) {
+                navigate(`/books/${id}/Update`, { state: { book: result.data } });
+            } else {
+                console.error('Book could not be fetched');
+            }
+        } catch (error) {
+            console.error("There was a problem fetching the book: ", error);
+        }
+    };
+
+    const handleDelete = async (e) => {
+        fetch(`http://localhost:8080/api/books/delete/${book._id}`, {
+            method: "DELETE",
+        })
+        .then((response) => response.json())
+        .then((result) => {
+            if (result.statusCode === 200) {
+                console.log('Success!')
+            } else {
+                console.error(`Book with ${book._id} could not be fetched`)
+            }
+        })
+        .catch(error => console.error("There is a problem with the delete operation: ", error))
     }
 
     return (
         <main>
+
             <div className="update-comic-container">
                 <div className="update-create-comic">
                     <h1>UPDATE COMIC</h1>
-                    <form action="#" className="update-comic-form" onSubmit={updateFormSubmission}>
+                    <form action="#" className="update-comic-form" onSubmit={handleSubmit}>
                         <div>
                             <label htmlFor="title" className="title-field">Title: 
-                                <input type="text" value={book.title} className="title-input" id="title" placeholder="Title" required/>
+                                <input type="text" value={title} className="title-input" id="title" onChange={handleChange} required/>
                             </label>
                         </div>
                         <br></br>
                         <div>
                             <label htmlFor="author" className="author-field">Author:
-                                <input type="text" value={book.author} className="author-input" id="author" placeholder="Author" required/>
+                                <input type="text" value={author} className="author-input" id="author" onChange={handleChange} required/>
                             </label>
                         </div>
                         <br></br>
                         <div>
                             <label htmlFor="publisher">Publisher: 
-                                <select name="publisher" id="publisher" value={book.publisher}>
-                                    <option value="publisher value stored in the database" selected>publisher value stored in the database</option>
+                                <select name="publisher" id="publisher" value={publisher} onChange={handleChange}>
+                                    <option value="publisher value stored in the database">publisher value stored in the database</option>
                                     <option value="BOOM! Box" disabled>BOOM! Box</option>
                                     <option value="DC Comics" disabled>DC Comics</option>
                                     <option value="Harry N. Abrams" disabled>Harry N. Abrams</option>
@@ -96,28 +109,31 @@ function Update() {
                         <br></br>
                         <div>
                             <label htmlFor="genre">Genre:
-                                <input type="text" value={book.genre} className="genre-input" id="genre" placeholder="Genre" required/>
+                                <input type="text" value={genre} className="genre-input" id="genre" placeholder="Genre" onChange={handleChange} required/>
                             </label>
                         </div>
                         <br></br>
                         <div>
                             <label htmlFor="pages">Number of Pages: 
-                                <input type="text" value={book.pages} className="pages-input" id="pages" placeholder="Pages stored in database" required/>
+                                <input type="text" value={pages} className="pages-input" id="pages" placeholder="Pages stored in database" onChange={handleChange} required/>
                             </label>
                         </div>
                         <br></br>
                         <div>
                             <label htmlFor="rating">Rating: 
-                                <input type="text" value={book.rating} className="rating-input" id="rating" placeholder="Rating stored in database" required/>
+                                <input type="text" value={rating} className="rating-input" id="rating" placeholder="Rating stored in database" onChange={handleChange} required/>
                             </label>
                         </div>
                         <br></br>
                         <div>
                             <label htmlFor="synopsis">Synopsis: 
-                                <textarea name="synopsis" id="synopsis" placeholder="Synopsis value stored in the database" value={book.synopsis}></textarea>
+                                <textarea name="synopsis" id="synopsis" placeholder="Synopsis value stored in the database" value={synopsis} onChange={handleChange}></textarea>
                             </label>
                         </div>
                         <br></br>
+
+                    
+
                         <button id="button">Submit</button>
                     </form>
                 </div>

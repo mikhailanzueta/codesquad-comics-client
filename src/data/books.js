@@ -1,4 +1,4 @@
-const books = [
+const Books = [
   {
     _id: "66b62a49-a8de-4914-ab3f-49fe0554c08a",
     title: "Fun Home: A Family Tragicomic",
@@ -145,4 +145,4 @@ const books = [
   },
 ];
 
-export default books;
+export default Books;

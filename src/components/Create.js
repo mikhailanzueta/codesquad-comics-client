@@ -1,5 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import '../css/styles.css'
 
 // import {useState, useEffect} from 'react'
 
@@ -7,34 +8,39 @@ function Create() {
     const navigate = useNavigate();
     const createFormSubmission = (e) => {
         e.preventDefault();
-        console.log(`This method ran.`)
-        console.log(e.title.value)
-        console.log(e.author.value)
-        console.log(e.publisher.value)
-        console.log(e.genre.value)
-        console.log(e.pages.value)
-        console.log(e.rating.value)
-        console.log(e.synopsis.value)
+        // console.log(`This method ran.`)
+        // console.log(e.title.value)
+        // console.log(e.author.value)
+        // console.log(e.publisher.value)
+        // console.log(e.genre.value)
+        // console.log(e.pages.value)
+        // console.log(e.rating.value)
+        // console.log(e.synopsis.value)
 
         const body = {
-            title: e.target.title.value,
-            author: e.target.author.value,
-            publisher: e.target.publisher.value,
-            genre: e.target.genre.value,
-            pages: e.target.pages.value,
-            rating: e.target.rating.value,
-            synopsis: e.target.synopsis.value,
+            title: e.target.elements.title.value,
+            author: e.target.elements.author.value,
+            publisher: e.target.elements.publisher.value,
+            genre: e.target.elements.genre.value,
+            pages: e.target.elements.pages.value,
+            rating: e.target.elements.rating.value,
+            synopsis: e.target.elements.synopsis.value,
           }
 
         fetch("http://localhost:8080/api/books/create", {
             method: "POST",
-            body: JSON.stringify(body)
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
         })
             .then((response) => response.json())
             .then((result) => {
-                if (result.statusCode === 200) {
+                if (result.statusCode === 201) {
                     console.log('Success!');
                     navigate('/Admin');
+                } else {
+                    console.log(`Failed to create book: `, result)
                 }
             })
             .catch(error => console.log('There was a problem fetching the data: ', error))
@@ -43,6 +49,7 @@ function Create() {
 
     return (
         <main>
+
             <div className="create-comic-container">
                 <div className="create-comic">
                     <h1>CREATE NEW COMIC</h1>
@@ -61,18 +68,7 @@ function Create() {
                         <br></br>
                         <div>
                             <label htmlFor="publisher">Publisher: 
-                                <select name="publisher" id="publisher">
-                                    <option value="" selected>Select</option>
-                                    <option value="BOOM! Box">BOOM! Box</option>
-                                    <option value="DC Comics">DC Comics</option>
-                                    <option value="Harry N. Abrams">Harry N. Abrams</option>
-                                    <option value="Icon Comics">Icon Books</option>
-                                    <option value="Image Comics">Image Comics</option>
-                                    <option value="Marvel">Marvel</option>
-                                    <option value="Simon & Schuster">Simon & Schuster</option>
-                                    <option value="Top Shelf Productions">Top Shelf Productions</option>
-                                    <option value="VIZ Media LLC">VIZ Media LLC</option>
-                                </select>
+                                <input type="text" className="author-input" id="publisher" placeholder="Publisher" required/>
                             </label>
                         </div>
                         <br></br>

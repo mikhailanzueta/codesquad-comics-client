@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate, Link } from "react-router-dom";
 import {useState, useEffect} from 'react'
-import booksData from '../data/books'
+import Books from '../data/books'
+import '../css/styles.css'
 
 
 function Home() {
@@ -17,6 +19,7 @@ function Home() {
 
     return (
         <main>
+
             <div className="header-container">
                 <div className="codesquad-header">
                     <h1>CODESQUAD COMICS</h1>
@@ -35,7 +38,7 @@ function Home() {
                 <div className="collection-container">
 
 
-                    {booksData.map((books) => 
+                    {Books.map((books) => 
                         <div>
                             <div key={books.id} className="Comic-Collection">
                                 <img src={`./images/${books.image}`} alt={books.title}/>
@@ -47,22 +50,10 @@ function Home() {
                                <p className="book-author">Author: {books.author}</p>
                             </div>
                             <div className="Comic-Collection">
-                               <p className="book-publisher">Publisher: {books.publisher}</p>
-                            </div>
-                            <div className="Comic-Collection">
-                               <p className="book-genre">Genre: {books.genre}</p>
-                            </div>
-                            <div className="Comic-Collection">
-                               <p className="book-pages">Pages: {books.pages}</p>
-                            </div>
-                            <div className="Comic-Collection">
                                <p className="">Rating: {books.rating}</p>
                             </div>
-                            <div className="Comic-Collection">
-                               <p className="">Synopsis: {books.synopsis}</p>
-                            </div>
                             <div className="Comic-Details">
-                               <a href="#">Details</a>
+                               <a href="/Details">Details</a>
                             </div>
                         </div>
                     )}
