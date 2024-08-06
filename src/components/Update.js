@@ -7,11 +7,30 @@ import '../css/styles.css'
 import Books from '../data/books'
 
 
+function parseBookIdFromCurrentPath(url){
+    // TODO
+    // return bookId (string)
+    return url.substring(7, url.length - 7)
+    
+}
+
+function getBookById(bookId) {
+    for (const book of Books) {
+        if (bookId === book._id) {
+            return book
+        }
+    }
+}
+
 
 function Update() {
+
     const navigate = useNavigate()
     const location = useLocation();
-    const [book, setBook] = useState(location.state?.book || {});
+    const bookId = parseBookIdFromCurrentPath(location.pathname);
+    const Book = getBookById(bookId)
+    const [book, setBook] = useState(Book);
+    console.log(location, book);
     const { title, author, publisher, genre, pages, rating, synopsis } = book;
 
     const handleChange = (e) => {
@@ -40,36 +59,29 @@ function Update() {
         }
     };
 
-    const handleEdit = async (id) => {
-        try {
-            const response = await fetch(`http://localhost:8080/api/books/${id}`, {
-                method: "GET",
-            })
-            const result = await response.json();
-            if (result.statusCode === 200) {
-                navigate(`/books/${id}/Update`, { state: { book: result.data } });
-            } else {
-                console.error('Book could not be fetched');
-            }
-        } catch (error) {
-            console.error("There was a problem fetching the book: ", error);
-        }
-    };
+    // const handleEdit = async (id) => {
+    //     try {
+    //         const response = await fetch(`http://localhost:8080/api/books/${id}`, {
+    //             method: "GET",
+    //         })
+    //         const result = await response.json();
+    //         if (result.statusCode === 200) {
+    //             navigate(`/books/${id}/Update`, { state: { book: result.data } });
+    //         } else {
+    //             console.error('Book could not be fetched');
+    //         }
+    //     } catch (error) {
+    //         console.error("There was a problem fetching the book: ", error);
+    //     }
+    // };
 
-    const handleDelete = async (e) => {
-        fetch(`http://localhost:8080/api/books/delete/${book._id}`, {
-            method: "DELETE",
-        })
-        .then((response) => response.json())
-        .then((result) => {
-            if (result.statusCode === 200) {
-                console.log('Success!')
-            } else {
-                console.error(`Book with ${book._id} could not be fetched`)
-            }
-        })
-        .catch(error => console.error("There is a problem with the delete operation: ", error))
-    }
+    // useEffect(() => {
+    //     fetch(`http://localhost:8080/api/books/${bookId}}`, {
+    //         method: "GET",
+    //     }).then((response) => response.json())
+    //     .then(res => setBook(res))
+    // }, [])
+
 
     return (
         <main>

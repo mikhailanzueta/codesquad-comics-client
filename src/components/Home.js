@@ -53,7 +53,7 @@ function Home() {
                                <p className="">Rating: {books.rating}</p>
                             </div>
                             <div className="Comic-Details">
-                               <a href="/Details">Details</a>
+                               <a href={`/Details/${books.id}`}>Details</a>
                             </div>
                         </div>
                     )}
