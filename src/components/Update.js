@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate, Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import '../css/styles.css'
-import Books from '../data/books'
+import books from '../data/books'
 
 
 function parseBookIdFromCurrentPath(url){
@@ -15,7 +15,7 @@ function parseBookIdFromCurrentPath(url){
 }
 
 function getBookById(bookId) {
-    for (const book of Books) {
+    for (const book of books) {
         if (bookId === book._id) {
             return book
         }

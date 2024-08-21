@@ -32,15 +32,7 @@ function App() {
           <Route path='/Signup' element={<Signup  user={user} setUser={setUser}/>}/>
           <Route path='/Login' element={<Login  user={user} setUser={setUser}/>}/>
           <Route path='/Update' element={<Update />} />
-          <Route path='/books/:bookId/Update' element={<Update />} loader = {
-            async ({request}) => {
-              return await fetch(`http://localhost:8080/api/books`, {
-                method: "GET",
-            })
-                .then((response) => response.json())
-                .then(res => res._id)
-            }
-          } />
+          <Route path='/books/:bookId/Update' element={<Update />} />
           <Route path='/Details/:bookId' element={<Details />} />
         </Routes>
       <Footer />

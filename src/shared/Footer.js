@@ -42,7 +42,7 @@ function Footer() {
                         <div className="Product-Of-Footer">
                             <h2>A PRODUCT OF</h2>
                             <Link to="#" target="_blank" rel="nofollow">
-                                <img src={`./images/CodeSquad-logo.png`} alt="CodeSquad-logo-b" />
+                                <img src={`../images/CodeSquad-logo.png`} alt="CodeSquad-logo-b" />
                             </Link>
                         </div>
                     </div>

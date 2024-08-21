@@ -15,7 +15,7 @@ function Home() {
             .then((response) => response.json())
             .then((result) => setBooks(result.data))
             .catch(error => console.error('There was a problem fetching the data: ', error))
-    }, [books])
+    }, [])
 
     return (
         <main>
@@ -53,7 +53,7 @@ function Home() {
                                <p className="">Rating: {books.rating}</p>
                             </div>
                             <div className="Comic-Details">
-                               <a href={`/Details/${books.id}`}>Details</a>
+                               <Link to ={`/Details/${books._id}`}>Details</Link>
                             </div>
                         </div>
                     )}

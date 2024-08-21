@@ -2,7 +2,7 @@ import React from "react";
 import {useState, useEffect} from 'react'
 import { useNavigate, Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
 import '../css/styles.css'
 
 
@@ -46,7 +46,7 @@ function Header() {
                 <div className="Navbar-container">
                     <div className="Navbar">
                         <nav className="navbar-logo">
-                            <img src={`./images/CodeSquad-Comics-logo.png`} alt="codesquad-comics-logo" />
+                            <img src={`../images/CodeSquad-Comics-logo.png`} alt="codesquad-comics-logo" />
                         </nav>
                     </div>
                     <div className="nav-links">
