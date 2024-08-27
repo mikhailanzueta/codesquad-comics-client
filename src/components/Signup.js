@@ -16,17 +16,20 @@ function Signup ({ user, setUser }) {
       password: e.target.password.value,
     };
 
-    console.log('body :>> ', JSON.stringify(body));
+    console.log('body :>> ', body);
 
     fetch(`http://localhost:8080/signup`, {
       method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(body),
     })
       .then((response) => response.json())
       .then((result) => {
         console.log("result :>> ", result);
-        localStorage.setItem("user", JSON.stringify(result.data));
         setUser(result.data);
+        localStorage.setItem("user", JSON.stringify(user));
         navigate("/admin");
       })
       .catch((error) => console.log("There was a problem fetching the data: ", error));

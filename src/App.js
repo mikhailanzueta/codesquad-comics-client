@@ -16,9 +16,15 @@ import './css/styles.css'
 
 function App() {
 
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem('user')) || {}
-  );
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem('user');
+    try {
+      return storedUser ? JSON.parse(storedUser) : {};
+    } catch (error) {
+      console.error('Error parsing JSON from localStorage', error);
+      return {};
+    }
+  });
   
   
   return (

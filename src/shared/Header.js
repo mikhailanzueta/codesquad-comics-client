@@ -9,6 +9,8 @@ import '../css/styles.css'
 function Header() {
     const navigate = useNavigate();
     const [user, setUser] = useState({})
+    const [isMenuOpen, setMenuOpen] = useState(false)
+
 
     const handleLogout = (e) => {
         fetch("http://localhost:8080/logout", {
@@ -39,6 +41,10 @@ function Header() {
             )}
     }
 
+    const toggleMenu = () => {
+        setMenuOpen(!isMenuOpen)
+    }
+
 
     return (
         <main>
@@ -49,7 +55,7 @@ function Header() {
                             <img src={`../images/CodeSquad-Comics-logo.png`} alt="codesquad-comics-logo" />
                         </nav>
                     </div>
-                    <div className="nav-links">
+                    <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
                             <ul className="navbar-navigation">
                                 <li>
                                     <Link to="/">Home</Link>
@@ -63,8 +69,8 @@ function Header() {
                             </ul>
                     </div>
                     <input type="checkbox" id="check" />
-                    <label htmlFor="check" className="check-btn">
-                        <FontAwesomeIcon icon={faBars} className="fa fa-bars" />
+                    <label htmlFor="check" className="check-btn" onClick={toggleMenu}>
+                        <FontAwesomeIcon icon={isMenuOpen ? faXmark : faBars} className="fa fa-bars" />
                     </label>
                 </div>
             </header>
