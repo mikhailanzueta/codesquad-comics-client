@@ -272,37 +272,92 @@ h2 {
 /* End of Footer */
 
 /* Login.html css */
-.login {
+.login-page {
     background-color: var(--white);
     border: 4px solid var(--blue);
     margin: 0 18% 12% 18%;
-    height: 35vh;
-}
-
-.login h1 {
+    height: auto;
+    padding: 20px;
+  }
+  
+  .login-page h1 {
     text-align: center;
     color: var(--blue);
     font-size: 2em;
-    margin-top: 40px;
-}
-
-.email-login {
-    margin: 0 0 0 26%;
-}
-
-.password-login {
-    margin: 0 0 0 29%;
-}
-
-.login input {
+    margin-top: 20px;
+  }
+  
+  .login-page div {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-page label {
+    margin-bottom: 5px;
+    color: var(--blue);
+    font-weight: bold;
+    width: 100px;
+    text-align: right;
+    margin-right: 10px;
+  }
+  
+  .login-page input {
     width: 20vw;
-}
-
-.login button {
+    padding: 5px;
+  }
+  
+  .login-page button {
     padding: 3px 12px;
-    margin: 20px 0 40px 47%;
-}
-/* End of login.html css */
+    margin: 20px auto 40px auto;
+    display: block;
+  }
+/* End of login.js css */
+
+/* Signup.js css */
+.signup-page {
+    background-color: var(--white);
+    border: 4px solid var(--blue);
+    margin: 0 18% 12% 18%;
+    height: auto;
+    padding: 20px;
+  }
+  
+  .signup-page h1 {
+    text-align: center;
+    color: var(--blue);
+    font-size: 2em;
+    margin-top: 20px;
+  }
+  
+  .signup-page div {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .signup-page label {
+    margin-bottom: 5px;
+    color: var(--blue);
+    font-weight: bold;
+    width: 100px;
+    text-align: right;
+    margin-right: 10px;
+  }
+  
+  .signup-page input {
+    width: 20vw;
+    padding: 5px;
+  }
+  
+  .signup-page button {
+    padding: 3px 12px;
+    margin: 20px auto 40px auto;
+    display: block;
+  }
+/* End of signup.js css */  
 
 /* About.html css */
 .about-codesquad {

@@ -33,25 +33,20 @@ function Login({user, setUser}) {
     }
 
     return (
-        <main>
-
-            <section className="login">
-                <h1>LOGIN</h1>
-                <form action="#" className="email-login" onSubmit={loginFormSubmission}>
-                    <label htmlFor="email" className="email-field">Email address:
-                        <input type="email" className="email-input" id="email" placeholder="Email" required/>
-                    </label>
-                </form>
-                <br></br>
-                <form action="#" className="password-login">
-                    <label htmlFor="password" className="password-field">Password:
-                        <input type="password" className="email-input" id="password" placeholder="Password" required/>
-                    </label>
-                </form>
-                <br></br>
-                <button id="button">Submit</button>
-            </section>
-        </main>
+        <div className="login-page">
+            <h1>LOGIN PAGE</h1>
+            <form onSubmit={loginFormSubmission}>
+            <div>
+                <label htmlFor="email">Email:</label>
+                <input type="text" name="email" id="email" required />
+            </div>
+            <div>
+                <label htmlFor="password">Password:</label>
+                <input type="password" name="password" id="password" required />
+            </div>
+            <button type="submit">Login</button>
+            </form>
+      </div>
     )
 }
 

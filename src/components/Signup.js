@@ -37,26 +37,29 @@ function Signup ({ user, setUser }) {
 
   return (
     <React.Fragment>
-      <h1>SIGNUP PAGE</h1>
-      <form onSubmit={handleSignupFormSubmit}>
-        <div>
-          <label htmlFor="firstName">First Name</label>
-          <input type="text" name="firstName" id="firstName" required />
-        </div>
-        <div>
-          <label htmlFor="lastName">Last Name</label>
-          <input type="text" name="lastName" id="lastName" required />
-        </div>
-        <div>
-          <label htmlFor="username">Username</label>
-          <input type="text" name="username" id="username" required />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input type="password" name="password" id="password" required />
-        </div>
-        <button type="submit">Sign up</button>
-      </form>
+      <div className="signup-page">
+        <h1>SIGNUP PAGE</h1>
+        <form onSubmit={handleSignupFormSubmit}>
+          <div>
+            <label htmlFor="firstName">First Name:</label>
+            <input type="text" name="firstName" id="firstName" required />
+          </div>
+          <div>
+            <label htmlFor="lastName">Last Name:</label>
+            <input type="text" name="lastName" id="lastName" required />
+          </div>
+          <div>
+            <label htmlFor="username">Username:</label>
+            <input type="text" name="username" id="username" required />
+          </div>
+          <div>
+            <label htmlFor="password">Password:</label>
+            <input type="password" name="password" id="password" required />
+          </div>
+          <button type="submit">Sign up</button>
+        </form>
+      </div>
+      
     </React.Fragment>
   );
 };
