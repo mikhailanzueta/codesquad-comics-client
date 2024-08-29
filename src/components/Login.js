@@ -7,23 +7,27 @@ function Login({user, setUser}) {
     const loginFormSubmission = (e) => {
         e.preventDefault();
         console.log(`This method ran.`)
-        console.log(e.email.value)
-        console.log(e.password.value)
+        console.log(e.target.username.value)
+        console.log(e.target.password.value)
 
         const body = {
-            email: e.target.email.value,
+            username: e.target.username.value,
             password: e.target.password.value
         }
 
         fetch("http://localhost:8080/login/local",{
             method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(body)
         })
             .then((response) => response.json())
             .then((result) => {
                 if (result.statusCode === 200) {
-                    console.log('Success!')
-                    localStorage.setItem('user', JSON.stringify(result.data))
+                    console.log('Success!: ', result)
+                    setUser(result.data)
+                    localStorage.setItem('user', JSON.stringify(user))
                     navigate('/Admin')
                 } else {
                     console.log("Something went wrong!")
@@ -37,8 +41,8 @@ function Login({user, setUser}) {
             <h1>LOGIN PAGE</h1>
             <form onSubmit={loginFormSubmission}>
             <div>
-                <label htmlFor="email">Email:</label>
-                <input type="text" name="email" id="email" required />
+                <label htmlFor="username">Username:</label>
+                <input type="text" name="username" id="username" required />
             </div>
             <div>
                 <label htmlFor="password">Password:</label>
