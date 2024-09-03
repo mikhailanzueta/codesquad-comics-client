@@ -310,9 +310,19 @@ h2 {
   
   .login-page button {
     padding: 3px 12px;
-    margin: 20px auto 40px auto;
+    margin: 20px auto 24px auto;
     display: block;
   }
+
+  .signup-btn {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 10px;
+    color: var(--blue);
+    text-decoration: underline;
+  }
+  
 /* End of login.js css */
 
 /* Signup.js css */
@@ -356,6 +366,15 @@ h2 {
     padding: 3px 12px;
     margin: 20px auto 40px auto;
     display: block;
+  }
+
+  .login-btn {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 10px;
+    color: var(--blue);
+    text-decoration: underline;
   }
 /* End of signup.js css */  
 

@@ -27,7 +27,7 @@ function Login({user, setUser}) {
                 if (result.statusCode === 200) {
                     console.log('Success!: ', result)
                     setUser(result.data)
-                    localStorage.setItem('user', JSON.stringify(user))
+                    localStorage.setItem('user', JSON.stringify(result.data))
                     navigate('/Admin')
                 } else {
                     console.log("Something went wrong!")
@@ -49,6 +49,7 @@ function Login({user, setUser}) {
                 <input type="password" name="password" id="password" required />
             </div>
             <button type="submit">Login</button>
+            <Link to="/signup" className="signup-btn">Don't have an account?</Link>
             </form>
       </div>
     )

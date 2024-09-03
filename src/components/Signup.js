@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import '../css/styles.css'
 
 
@@ -27,10 +27,10 @@ function Signup ({ user, setUser }) {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log("result :>> ", result);
+        console.log("result :>> ", result.data);
         setUser(result.data);
-        localStorage.setItem("user", JSON.stringify(user));
-        navigate("/admin");
+        localStorage.setItem("user", JSON.stringify(result.data));
+        navigate("/Admin");
       })
       .catch((error) => console.log("There was a problem fetching the data: ", error));
   };
@@ -57,6 +57,7 @@ function Signup ({ user, setUser }) {
             <input type="password" name="password" id="password" required />
           </div>
           <button type="submit">Sign up</button>
+          <Link to="/login" className="login-btn">Already have an account?</Link>
         </form>
       </div>
       

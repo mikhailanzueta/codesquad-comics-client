@@ -7,12 +7,27 @@ import '../css/styles.css'
 
 
 function Header() {
+    console.log('header component rendering')
     const navigate = useNavigate();
     const [user, setUser] = useState({})
-    const [isMenuOpen, setMenuOpen] = useState(false)
+    const [isMenuOpen, setMenuOpen] = useState(false);
+
+  
+    useEffect(() => {
+        console.log('useEffect running')
+        const savedUser = localStorage.getItem('user');
+        if (savedUser) {
+            const parsedUser = JSON.parse(savedUser);
+            console.log('Parsed user:', parsedUser);  // Debugging log
+            setUser(parsedUser);
+        } else {
+            setUser({});
+        }
+    }, []);
 
 
     const handleLogout = (e) => {
+        e.preventDefault()
         fetch("http://localhost:8080/logout", {
             method: "GET",
         })
@@ -30,20 +45,14 @@ function Header() {
                 navigate('/Admin') 
             })
              
-        
-            {user.username ? (
-                <>
-                    <Link to='/Admin'>Admin</Link>
-                    <a href="#" onClick={handleLogout}>Logout</a>
-                </>
-            ) : (
-                <Link to='/Login'>Login</Link>
-            )}
     }
 
     const toggleMenu = () => {
         setMenuOpen(!isMenuOpen)
     }
+
+    console.log('User state before rendering:', user);
+
 
 
     return (
@@ -63,9 +72,15 @@ function Header() {
                                 <li>
                                     <Link to="/About">About</Link>
                                 </li>
-                                <li>
-                                    <Link to="/Login">Login</Link>
-                                </li>
+                                {localStorage.getItem('user') ? (
+                                        <li>
+                                            <Link to="/" onClick={handleLogout}>Logout</Link>
+                                        </li>
+                                ) : (
+                                    <li>
+                                        <Link to="/Login">Login</Link>
+                                    </li>
+                                )}
                             </ul>
                     </div>
                     <input type="checkbox" id="check" />
