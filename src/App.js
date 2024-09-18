@@ -8,6 +8,7 @@ import Signup from './components/Signup'
 import About from './components/About'
 import Create from './components/Create'
 import Update from './components/Update'
+import Delete from './components/Delete'
 import Header from './shared/Header'
 import Footer from './shared/Footer'
 import Details from './components/Details'
@@ -39,6 +40,8 @@ function App() {
           <Route path='/Login' element={<Login  user={user} setUser={setUser}/>}/>
           <Route path='/Update' element={<Update />} />
           <Route path='/books/:bookId/Update' element={<Update />} />
+          <Route path='/Delete' element={<Delete />} />
+          <Route path='/books/:bookId/Delete' element={<Delete />} />
           <Route path='/Details/:bookId' element={<Details />} />
         </Routes>
       <Footer />

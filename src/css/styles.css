@@ -480,8 +480,8 @@ h2 {
 
 /* CREATE.HTML CSS */
 .create-comic-container {
-margin: 0 20% 0 20%;
-    height: 80vh;
+    margin: 0 20% 0 20%;
+    height: auto;
     background-color: var(--white);
     border: 4px solid var(--blue);
     display: flex;
@@ -518,7 +518,7 @@ margin: 0 20% 0 20%;
 /* UPDATE.HTML CSS */
 .update-comic-container {
     margin: 0 20% 0 20%;
-    height: 80vh;
+    height: auto;
     background-color: var(--white);
     border: 4px solid var(--blue);
     display: flex;
@@ -595,6 +595,20 @@ margin: 0 20% 0 20%;
 }
 
 @media screen and (min-width: 320px) and (max-width: 480px) {
+
+    .comic-table th, .comic-table td {
+        padding: 8px 4px; /* Reduced padding for smaller screens */
+    }
+
+    .comic-table button {
+        padding: 8px 0;
+    }
+
+    .admin-container button {
+        font-size: 0.9rem; /* Adjust button font size */
+        padding: 6px 12px;
+    }
+
     .update-comic-form div {
         margin: 0 28px 0 28px;
     }
@@ -642,17 +656,25 @@ margin: 0 20% 0 20%;
 
 @media screen and (max-width: 680px) {
     
-    .overflow-x {
-        width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .admin-container {
+        margin: 0 5%;
     }
 
     .comic-table {
         width: 100%;
-        margin: 0 25px;
+        font-size: 0.9rem; /* Smaller text for smaller screens */
+        padding: 0 5%;
     }
-}
 
-@media screen and (max-width: 768px) {
+    .comic-table button {
+        margin-left: 0; /* Adjust button margin for small screens */
+        width: 100%;
+    }
+
+
     
     .Footer {
         display: flex;
