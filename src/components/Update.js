@@ -66,6 +66,12 @@ function Update() {
         }
     };
 
+    const [file, setFile] = useState()
+    function handleImage(e) {
+        console.log(e.target.files)
+        setFile(URL.createObjectURL(e.target.files[0]))
+    }
+
 
 
     return (
@@ -74,7 +80,7 @@ function Update() {
             <div className="update-comic-container">
                 <div className="update-create-comic">
                     <h1>UPDATE COMIC</h1>
-                    <form action="#" className="update-comic-form" onSubmit={handleEdit}>
+                    <form action="/api/books" className="update-comic-form" onSubmit={handleEdit}>
                         <div>
                             <label htmlFor="title" className="title-field">Title: 
                                 <input type="text" value={book.title} className="title-input" id="title" onChange={handleChange} required/>
@@ -125,6 +131,12 @@ function Update() {
                         <div>
                             <label htmlFor="synopsis">Synopsis: 
                                 <textarea name="synopsis" id="synopsis" placeholder="Synopsis value stored in the database" value={book.synopsis} onChange={handleChange}></textarea>
+                            </label>
+                        </div>
+                        <div>
+                            <label htmlFor="image">Book Image:
+                                <input type="file" name="image" onChange={handleImage} />
+                                <img src={file} />
                             </label>
                         </div>
                         <br></br>

@@ -73,9 +73,15 @@ function Header() {
                                     <Link to="/About">About</Link>
                                 </li>
                                 {localStorage.getItem('user') ? (
+                                    <>
                                         <li>
                                             <Link to="/" onClick={handleLogout}>Logout</Link>
                                         </li>
+                                        <li>
+                                            <Link to="/Admin">Admin</Link>
+                                        </li>
+                                    </>
+                                        
                                 ) : (
                                     <li>
                                         <Link to="/Login">Login</Link>

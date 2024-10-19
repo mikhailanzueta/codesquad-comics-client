@@ -1,28 +1,19 @@
 import React from "react";
 import {useState, useEffect} from 'react'
-import { useNavigate, Link, useParams } from "react-router-dom";
-import Books from '../data/books'
+import { useNavigate, Link, useParams, useLocation } from "react-router-dom";
 import '../css/styles.css'
 
-function getBookById(bookId) {
-    for (const book of Books) {
-        if (bookId === book._id) {
-            return book
-        }
-    }
-    return null
-}
 
 
 
 function Details() {
-    const { bookId } = useParams()
-    console.log(bookId)
-     const Book = getBookById(bookId)
+    
     // console.log("Books:", Books);
     // console.log("BookId:", bookId);
-
-    const [book, setBook] = useState([Book])
+    const location = useLocation();
+    const bookId = location.pathname.split('/')[2]
+    const [book, setBook] = useState(null)
+    console.log(bookId)
 
     useEffect(() => {
         fetch(`http://localhost:8080/api/books/${bookId}`, {
@@ -33,30 +24,35 @@ function Details() {
         })
             .then((response) => response.json())
             .then((result) => {
-                console.log(result.data)
-                setBook(result.data)
+                console.log(result)
+                setBook(result)
             })
             .catch(error => console.error('There was a problem fetching the data: ', error))
     }, [])
 
-    console.log(Book)
+    if (!book) {
+        return <p>Loading...</p>;  // Display loading state while fetching the book data
+    }
+
 
 
     return (
         <main>
 
-            {!Book ? (
-                <div>Loading...</div>
-            ) : (
                 <div className="container">
                     <div className="card-container">
-                        <div key={Book._id} className="card-title">
-                            <h1>{Book.title}</h1>
-                            <img src={`../images/${Book.image}`} alt={book.title}/>
+                        <div key={book._id} className="card-title">
+                            <h1>{book.title}</h1>
+                            <img
+                            src={book.image && (book.image.includes('http') || book.image.includes('https'))
+                                ? book.image
+                                : `/images/${book.image}`}
+                            alt={book.title}
+                        />
                         </div>
                         <div className="comic-information">
                             <div className="comic-body">
-                                {Object.entries(Book)
+                                {Object.entries(book)
                                 .filter(([key]) => key !== '_id' && key !== 'image')
                                 .map(([key, value]) => (
                                     <p>
@@ -69,7 +65,7 @@ function Details() {
                     
                     
                 </div>
-            )}
+            
         </main>
         
     )

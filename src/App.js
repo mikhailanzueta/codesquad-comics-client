@@ -1,5 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
+import {AdvancedImage} from '@cloudinary/react';
+import {Cloudinary} from "@cloudinary/url-gen";
 import { Routes, Route } from "react-router-dom";
 import Admin from './components/Admin'
 import Home from './components/Home'
@@ -14,6 +16,12 @@ import Footer from './shared/Footer'
 import Details from './components/Details'
 
 import './css/styles.css'
+
+const cld = new Cloudinary({
+  cloud: {
+    cloudName: "denmwof8d"
+  }
+})
 
 function App() {
 

@@ -109,7 +109,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 
@@ -149,6 +149,7 @@ body {
 
 button {
     margin: 30px auto;
+    display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--yellow);
@@ -197,7 +198,6 @@ button {
     border-bottom-right-radius: 10%;
     border-top: none;
     border: 4px solid var(--yellow);
-
 }
 
 .comic-body {
@@ -382,9 +382,11 @@ h2 {
 .about-codesquad {
     background-color: var(--white);
     border: 4px solid var(--blue);
-    margin: 0 18% 0 18%;
-    height: 60vh;
+    margin: 0 18%; /* Adjust margin for larger screens */
+    padding: 20px; /* Add padding to control spacing */
+    height: auto; /* Allow height to adjust based on content */
     flex-wrap: wrap;
+    overflow-wrap: break-word; /* Prevent text overflow */
 }
 
 .about-codesquad h1 {
@@ -415,7 +417,6 @@ h2 {
 .Collection-Details {
     padding: 20px;
 }
-
 
 /* End of about.html css */
 
@@ -499,8 +500,6 @@ h2 {
     margin: 0 0 0 48px;
 }
 
-
-
 .comic-form input, select, textarea {
     width: 100%;
 }
@@ -513,7 +512,6 @@ h2 {
 #synopsis {
     height: 100px;
 }
-
 
 /* UPDATE.HTML CSS */
 .update-comic-container {
@@ -645,6 +643,20 @@ h2 {
         margin: 0 0 5% 30%;
     }
 
+    .admin-container {
+        overflow-x: auto; /* Allows horizontal scroll */
+        width: 100%; /* Ensure it uses the full available width */
+      }
+
+    .comic-table {
+        width: 100%; /* Make sure the table adapts within the container */
+        table-layout: fixed; /* Prevent the table from expanding beyond the container */
+      }
+
+    .overflow-x {
+        overflow-x: auto;
+    }
+
     .comic-table .edit-btn {
         margin-left: 5px;
     }
@@ -654,11 +666,38 @@ h2 {
     }
 }
 
-@media screen and (max-width: 680px) {
-    
+@media screen and (max-width: 550px) {
+    .about-codesquad {
+        margin: 0 3%; /* Further reduce margins */
+        padding: 5px; /* Smaller padding */
+        height: auto; /* Make height flexible */
+    }
+
+    .about-codesquad h1 {
+        font-size: 1.2em; /* Reduce heading size */
+    }
+
+    .about-codesquad p {
+        font-size: 12px; /* Adjust text size for smaller screens */
+    }
+
+    .about-codesquad h2 {
+        font-size: 1em; /* Adjust secondary heading size */
+    }
 }
 
 @media screen and (max-width: 768px) {
+    
+    .collection-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    
+    .collection-container button {
+        display: flex;
+    }
+
     .admin-container {
         margin: 0 5%;
     }
@@ -673,8 +712,6 @@ h2 {
         margin-left: 0; /* Adjust button margin for small screens */
         width: 100%;
     }
-
-
     
     .Footer {
         display: flex;
@@ -770,23 +807,18 @@ h2 {
     }
 
     .about-codesquad {
-        background-color: var(--white);
-        border: 4px solid var(--blue);
-        margin: 0 18% 0 18%;
-        height: 60vh;
-        flex-wrap: wrap;
+        margin: 0 5%; /* Reduce margins for smaller screens */
+        height: auto; /* Allow flexible height */
+        padding: 10px; /* Adjust padding for better responsiveness */
     }
     
     .about-codesquad h1 {
-        text-align: center;
-        color: var(--blue);
-        font-size: 1.5em;
-        margin-top: 45px;
+        font-size: 1.5em; /* Reduce font size */
     }
     
     .about-codesquad p {
-        margin: 0 20px;
-        font-size: 14px;
+        font-size: 14px; /* Reduce font size */
+        margin: 0 10px; /* Adjust margins */
     }
     
     .about-codesquad h2 {

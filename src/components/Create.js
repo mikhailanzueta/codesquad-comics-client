@@ -2,37 +2,27 @@ import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import '../css/styles.css'
 
-// import {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 
 function Create() {
     const navigate = useNavigate();
     const createFormSubmission = (e) => {
         e.preventDefault();
-        // console.log(`This method ran.`)
-        // console.log(e.title.value)
-        // console.log(e.author.value)
-        // console.log(e.publisher.value)
-        // console.log(e.genre.value)
-        // console.log(e.pages.value)
-        // console.log(e.rating.value)
-        // console.log(e.synopsis.value)
 
-        const body = {
-            title: e.target.elements.title.value,
-            author: e.target.elements.author.value,
-            publisher: e.target.elements.publisher.value,
-            genre: e.target.elements.genre.value,
-            pages: e.target.elements.pages.value,
-            rating: e.target.elements.rating.value,
-            synopsis: e.target.elements.synopsis.value,
-          }
+        // Create a FormData object to hold the form data, including the image file
+    const formData = new FormData();
+    formData.append("title", e.target.elements.title.value);
+    formData.append("author", e.target.elements.author.value);
+    formData.append("publisher", e.target.elements.publisher.value);
+    formData.append("genre", e.target.elements.genre.value);
+    formData.append("pages", e.target.elements.pages.value);
+    formData.append("rating", e.target.elements.rating.value);
+    formData.append("synopsis", e.target.elements.synopsis.value);
+    formData.append("image", e.target.elements.image.files[0]);
 
         fetch("http://localhost:8080/api/books/create", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
+            body: formData,
         })
             .then((response) => response.json())
             .then((result) => {
@@ -46,6 +36,12 @@ function Create() {
             .catch(error => console.log('There was a problem fetching the data: ', error))
     }
 
+    const [file, setFile] = useState()
+    function handleImage(e) {
+        console.log(e.target.files)
+        setFile(URL.createObjectURL(e.target.files[0]))
+    }
+
 
     return (
         <main>
@@ -53,7 +49,7 @@ function Create() {
             <div className="create-comic-container">
                 <div className="create-comic">
                     <h1>CREATE NEW COMIC</h1>
-                    <form action="#" className="comic-form" onSubmit={createFormSubmission}>
+                    <form action="/api/books" className="comic-form"  onSubmit={createFormSubmission}>
                         <div>
                             <label htmlFor="title" className="title-field">Title: 
                                 <input type="text" className="title-input" id="title" placeholder="Title" required/>
@@ -93,6 +89,12 @@ function Create() {
                         <div>
                             <label htmlFor="synopsis">Synopsis: 
                                 <textarea name="synopsis" id="synopsis" placeholder="synopsis"></textarea>
+                            </label>
+                        </div>
+                        <div>
+                            <label htmlFor="image">Book Image:
+                                <input type="file" name="image" onChange={handleImage} />
+                                <img src={file} />
                             </label>
                         </div>
                         <br></br>

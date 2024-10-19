@@ -10,16 +10,12 @@ function Admin() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/books`, {
+        fetch(`http://localhost:8080/api/books/`, {
             method: "GET",
         })
             .then((response) => response.json())
             .then((result) => {
-                if (result.statusCode === 200) {
-                    setBooks(result.data); // Set the books state from the fetched result
-                } else {
-                    console.error('Data could not be fetched');
-                }
+                setBooks(result); // Set the books state from the fetched result
             })
             .catch(error => console.error("There was a problem fetching the data: ", error));
     }, []);
